@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">MyKitchen</string>
+    <!-- Auth Strings -->
+    <string name="see_favorites">see your favorites dorm recipe</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create account</string>
+    <string name="quick_recipe">Quick recipe for dorm life.</string>
+    <!-- Dashboard Strings -->
+    <string name="my_recipes">My Recipes</string>
+    <string name="your_saved_recipes">Your saved dorm-friendly recipes</string>
+    <string name="no_recipes">No recipes yet</string>
+    <string name="start_building">Start building your collection of dorm-friendly recipes!</string>
+    <string name="add_recipe">+ Add Recipe</string>
+    <!-- Add Recipe Strings -->
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_title_hint">Recipe title</string>
+    <string name="description">Description</string>
+    <string name="food_description">Food Description recipe</string>
+    <string name="cook_time_minutes">Cook Time (minutes)</string>
+    <string name="category">Category</string>
+    <string name="fried">Fried</string>
+    <string name="save_recipe">Save recipe</string>
+    <!-- Profile Strings -->
+    <string name="profile">Profile</string>
+    <string name="update_profile">Update profile</string>
+    <string name="update_your_info">Update your profile information</string>
+    <string name="statistics">Statistics</string>
+    <string name="your_recipe_collection">Your recipe collection at a glance</string>
+    <string name="total_recipes">Total Recipes</string>
+    <string name="microwave">Microwave</string>
+    <string name="no_cook">No-Cook</string>
+    <string name="edit_profile">Edit profile</string>
+    <!-- Legacy Baking Screen Strings -->
+    <string name="action_go">Go</string>
+    <string name="baking_title">Baking with Gemini</string>
+    <string name="label_prompt">Prompt</string>
+    <string name="prompt_placeholder">Provide a recipe for the baked goods in the image</string>
+    <string name="image1_description">Cupcake</string>
+    <string name="image2_description">Cookies</string>
+    <string name="image3_description">Cake</string>
+    <string name="results_placeholder">(Results will appear here)</string>
+</resources>
