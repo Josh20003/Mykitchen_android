@@ -2,6 +2,40 @@
 
 A comprehensive Android mobile application for managing and sharing dorm-friendly recipes. This is the mobile version of the MyKitchen web application, built with Jetpack Compose and modern Android development practices.
 
+## Screenshots
+
+### Register Screen
+New users can create an account with their name, email, and password.
+
+![Register Screen](/screenshot2.png)
+
+### Login Screen
+Existing users can sign in with their email and password.
+
+![Login Screen](/screenshot.png)
+
+### Dashboard Screen
+The main dashboard displays user statistics and quick actions.
+
+![Dashboard Screen](/screenshot3.png)
+
+### Profile Screen
+View user profile information and access account settings.
+
+![Profile Screen](/current_screen.png)
+
+### Update Profile Screen
+Update user profile information including name and email.
+
+![Update Profile Screen](/app_design.png)
+
+### Change Password Screen
+Securely change account password with current password verification.
+
+![Change Password Screen](/login_design.png)
+
+---
+
 ## Features
 
 ### 📱 Authentication
@@ -122,6 +156,212 @@ Login Screen ──→ Dashboard ──→ Profile
 - **Dashboard**: Main screen showing recipes with search
 - **Add Recipe**: Form to create new recipes
 - **Profile**: User info and statistics
+
+---
+
+## API Documentation
+
+### Base URL
+```
+https://api.example.com/
+```
+
+### Authentication
+All API endpoints (except login and register) require Bearer token authentication:
+```
+Authorization: Bearer {token}
+```
+
+### Endpoints
+
+#### Authentication
+
+##### POST /api/login
+Login with email and password.
+
+**Request:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "user@example.com",
+    "created_at": "2026-03-28T10:00:00Z",
+    "updated_at": "2026-03-28T10:00:00Z"
+  }
+}
+```
+
+##### POST /api/register
+Register a new user account.
+
+**Request:**
+```json
+{
+  "name": "John Doe",
+  "email": "user@example.com",
+  "password": "password123",
+  "password_confirmation": "password123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Registration successful",
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "user@example.com",
+    "created_at": "2026-03-28T10:00:00Z",
+    "updated_at": "2026-03-28T10:00:00Z"
+  }
+}
+```
+
+##### POST /api/logout
+Logout the current user.
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Logout successful"
+}
+```
+
+#### Profile
+
+##### GET /api/profile
+Get the current user's profile information.
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Profile retrieved successfully",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "user@example.com",
+    "created_at": "2026-03-28T10:00:00Z",
+    "updated_at": "2026-03-28T10:00:00Z"
+  }
+}
+```
+
+##### PUT /api/profile
+Update the current user's profile.
+
+**Request:**
+```json
+{
+  "name": "John Updated",
+  "email": "newemail@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully",
+  "user": {
+    "id": 1,
+    "name": "John Updated",
+    "email": "newemail@example.com",
+    "created_at": "2026-03-28T10:00:00Z",
+    "updated_at": "2026-03-28T12:00:00Z"
+  }
+}
+```
+
+##### PUT /api/profile/password
+Change the current user's password.
+
+**Request:**
+```json
+{
+  "current_password": "oldpassword123",
+  "new_password": "newpassword123",
+  "new_password_confirmation": "newpassword123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Password changed successfully"
+}
+```
+
+#### Dashboard
+
+##### GET /api/dashboard
+Get dashboard data including user info and statistics.
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Dashboard data retrieved successfully",
+  "data": {
+    "user": {
+      "id": 1,
+      "name": "John Doe",
+      "email": "user@example.com"
+    },
+    "stats": {
+      "recipes": 12,
+      "favorites": 5,
+      "total_cook_time": 180
+    }
+  }
+}
+```
+
+### Error Responses
+
+All endpoints return consistent error responses:
+
+```json
+{
+  "success": false,
+  "message": "Error description",
+  "errors": {
+    "field_name": ["Error message for this field"]
+  }
+}
+```
+
+### HTTP Status Codes
+
+| Code | Description |
+|------|-------------|
+| 200  | Success |
+| 201  | Created |
+| 400  | Bad Request - Invalid input data |
+| 401  | Unauthorized - Invalid or missing token |
+| 403  | Forbidden - Insufficient permissions |
+| 404  | Not Found - Resource not found |
+| 422  | Validation Error - Input validation failed |
+| 500  | Server Error - Internal server error |
+
+---
 
 ## Color Scheme
 
