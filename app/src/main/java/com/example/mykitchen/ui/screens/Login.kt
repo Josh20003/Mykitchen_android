@@ -24,27 +24,23 @@ import com.example.mykitchen.ui.viewmodel.AuthViewModel
 import com.example.mykitchen.ui.viewmodel.UiState
 
 @Composable
-fun RegisterScreen(
-    onRegisterSuccess: () -> Unit,
-    onNavigateToLogin: () -> Unit,
+fun LoginScreen(
+    onLoginSuccess: () -> Unit,
+    onNavigateToRegister: () -> Unit,
     viewModel: AuthViewModel = viewModel()
 ) {
-    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
 
-    var nameError by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
-    var confirmPasswordError by remember { mutableStateOf("") }
 
-    val registerState by viewModel.registerState.collectAsStateWithLifecycle()
+    val loginState by viewModel.loginState.collectAsStateWithLifecycle()
 
-    // Handle register state
-    LaunchedEffect(registerState) {
-        when (registerState) {
-            is UiState.Success -> onRegisterSuccess()
+    // Handle login state
+    LaunchedEffect(loginState) {
+        when (loginState) {
+            is UiState.Success -> onLoginSuccess()
             is UiState.Error -> {
                 // Error is displayed in UI
             }
@@ -55,16 +51,6 @@ fun RegisterScreen(
     // Validation
     fun validate(): Boolean {
         var isValid = true
-
-        if (name.isEmpty()) {
-            nameError = "Name is required"
-            isValid = false
-        } else if (name.length < 2) {
-            nameError = "Name must be at least 2 characters"
-            isValid = false
-        } else {
-            nameError = ""
-        }
 
         if (email.isEmpty()) {
             emailError = "Email is required"
@@ -86,16 +72,6 @@ fun RegisterScreen(
             passwordError = ""
         }
 
-        if (confirmPassword.isEmpty()) {
-            confirmPasswordError = "Please confirm your password"
-            isValid = false
-        } else if (confirmPassword != password) {
-            confirmPasswordError = "Passwords do not match"
-            isValid = false
-        } else {
-            confirmPasswordError = ""
-        }
-
         return isValid
     }
 
@@ -107,7 +83,7 @@ fun RegisterScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         // Logo
         Image(
@@ -134,7 +110,7 @@ fun RegisterScreen(
             color = Color.Gray
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         // Tab selector
         Row(
@@ -143,22 +119,7 @@ fun RegisterScreen(
                 .height(48.dp)
                 .background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp))
         ) {
-            // Login Tab (Inactive)
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .clickable { onNavigateToLogin() },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Login",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.Gray
-                )
-            }
-            // Sign Up Tab (Active)
+            // Login Tab (Active)
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -167,10 +128,25 @@ fun RegisterScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Sign Up",
+                    text = "Login",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black
+                )
+            }
+            // Sign Up Tab (Inactive)
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .clickable { onNavigateToRegister() },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Sign Up",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Gray
                 )
             }
         }
@@ -202,39 +178,6 @@ fun RegisterScreen(
         if (emailError.isNotEmpty()) {
             Text(
                 text = emailError,
-                color = MaterialTheme.colorScheme.error,
-                fontSize = 12.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Username Field
-        Text(
-            text = "Username",
-            fontSize = 14.sp,
-            color = Color.Black,
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        OutlinedTextField(
-            value = name,
-            onValueChange = {
-                name = it
-                nameError = ""
-            },
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.LightGray,
-                focusedBorderColor = Color(0xFFEE7B00)
-            ),
-            isError = nameError.isNotEmpty()
-        )
-        if (nameError.isNotEmpty()) {
-            Text(
-                text = nameError,
                 color = MaterialTheme.colorScheme.error,
                 fontSize = 12.sp,
                 modifier = Modifier.fillMaxWidth()
@@ -275,42 +218,8 @@ fun RegisterScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Confirm Password Field
-        Text(
-            text = "Confirm password",
-            fontSize = 14.sp,
-            color = Color.Black,
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        OutlinedTextField(
-            value = confirmPassword,
-            onValueChange = {
-                confirmPassword = it
-                confirmPasswordError = ""
-            },
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.LightGray,
-                focusedBorderColor = Color(0xFFEE7B00)
-            ),
-            visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(),
-            isError = confirmPasswordError.isNotEmpty()
-        )
-        if (confirmPasswordError.isNotEmpty()) {
-            Text(
-                text = confirmPasswordError,
-                color = MaterialTheme.colorScheme.error,
-                fontSize = 12.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
         // Error message from API
-        when (val state = registerState) {
+        when (val state = loginState) {
             is UiState.Error -> {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -326,11 +235,11 @@ fun RegisterScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Create Account Button
+        // Login Button
         Button(
             onClick = {
                 if (validate()) {
-                    viewModel.register(name, email, password, confirmPassword)
+                    viewModel.login(email, password)
                 }
             },
             modifier = Modifier
@@ -340,9 +249,9 @@ fun RegisterScreen(
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFEE7B00)
             ),
-            enabled = registerState != UiState.Loading
+            enabled = loginState != UiState.Loading
         ) {
-            if (registerState == UiState.Loading) {
+            if (loginState == UiState.Loading) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(24.dp),
                     color = Color.White,
@@ -350,7 +259,7 @@ fun RegisterScreen(
                 )
             } else {
                 Text(
-                    text = "Create account",
+                    text = "Login",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
