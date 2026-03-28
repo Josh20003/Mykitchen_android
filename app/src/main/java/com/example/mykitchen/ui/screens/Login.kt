@@ -85,12 +85,20 @@ fun LoginScreen(
     ) {
         Spacer(modifier = Modifier.height(48.dp))
 
-        // Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "MyKitchen Logo",
-            modifier = Modifier.size(80.dp)
-        )
+        // Logo (Text-based since image file is not available)
+        Box(
+            modifier = Modifier
+                .size(80.dp)
+                .background(Color(0xFFEE7B00), RoundedCornerShape(16.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "MK",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 

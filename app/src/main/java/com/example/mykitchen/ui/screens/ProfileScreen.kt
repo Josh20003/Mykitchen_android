@@ -1,6 +1,5 @@
 package com.example.mykitchen.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -17,13 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mykitchen.R
 import com.example.mykitchen.ui.viewmodel.ProfileViewModel
 import com.example.mykitchen.ui.viewmodel.UiState
 
@@ -49,11 +47,20 @@ fun ProfileScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo),
-                            contentDescription = "Logo",
-                            modifier = Modifier.size(32.dp)
-                        )
+                        // Logo
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(Color(0xFFEE7B00), RoundedCornerShape(8.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "MK",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "MyKitchen",
@@ -216,20 +223,20 @@ fun ProfileScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        StatCardProfile(
-                            icon = R.drawable.logo,
+                        StatCardProfileIcon(
+                            imageVector = Icons.Default.RestaurantMenu,
                             value = "0",
                             label = "Total Recipes",
                             modifier = Modifier.weight(1f)
                         )
-                        StatCardProfile(
-                            icon = R.drawable.logo,
+                        StatCardProfileIcon(
+                            imageVector = Icons.Default.Kitchen,
                             value = "0",
                             label = "Microwave",
                             modifier = Modifier.weight(1f)
                         )
-                        StatCardProfile(
-                            icon = R.drawable.logo,
+                        StatCardProfileIcon(
+                            imageVector = Icons.Default.NoFood,
                             value = "0",
                             label = "No-Cook",
                             modifier = Modifier.weight(1f)
@@ -283,8 +290,8 @@ fun ProfileScreen(
 }
 
 @Composable
-fun StatCardProfile(
-    icon: Int,
+fun StatCardProfileIcon(
+    imageVector: ImageVector,
     value: String,
     label: String,
     modifier: Modifier = Modifier
@@ -302,10 +309,11 @@ fun StatCardProfile(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = painterResource(id = icon),
+            Icon(
+                imageVector = imageVector,
                 contentDescription = null,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(32.dp),
+                tint = Color(0xFFEE7B00)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(

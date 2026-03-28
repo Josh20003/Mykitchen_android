@@ -52,11 +52,20 @@ fun DashboardScreen(
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo),
-                            contentDescription = "Logo",
-                            modifier = Modifier.size(32.dp)
-                        )
+                        // Logo
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(Color(0xFFEE7B00), RoundedCornerShape(8.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "MK",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "MyKitchen",
@@ -152,11 +161,20 @@ fun DashboardScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo),
-                            contentDescription = "Logo",
-                            modifier = Modifier.size(80.dp)
-                        )
+                        // Logo placeholder
+                        Box(
+                            modifier = Modifier
+                                .size(80.dp)
+                                .background(Color(0xFFEE7B00), RoundedCornerShape(16.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "MK",
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = "No recipes yet",
